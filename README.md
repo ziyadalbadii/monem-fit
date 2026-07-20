@@ -2,7 +2,7 @@
 
 Bilingual (Arabic/English) single-page web platform for a fitness coaching business.
 
-**Live site:** profound-cranachan-73d35d.netlify.app
+**Live site:** https://profound-cranachan-73d35d.netlify.app
 
 ## Features
 - Full Arabic/English support with RTL
