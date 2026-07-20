@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach Abdulmonem | تدريب رياضي شخصي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F7F6;
+    --surface:rgba(255,255,255,.6);
+    --surface-2:rgba(255,255,255,.5);
+    --accent:#D98E23;
+    --accent-2:#2E8C7E;
+    --text:#22313A;
+    --muted:#5F7276;
+    --line:rgba(34,49,58,.12);
+    --glass-bg:rgba(255,255,255,.55);
+    --glass-border:rgba(255,255,255,.75);
+    --glass-blur:blur(14px);
+    --glass-shadow:0 8px 28px rgba(34,49,58,.10);
+    --radius:18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Almarai', sans-serif;
+    line-height:1.8;
+    overflow-x:hidden;
+    position:relative;
+  }
+  .bg-mesh{
+    position:fixed; inset:0; z-index:-1; overflow:hidden;
+    background:
+      radial-gradient(ellipse 55% 45% at 15% 10%, rgba(255,196,110,.28), transparent 60%),
+      radial-gradient(ellipse 50% 45% at 88% 22%, rgba(126,214,199,.26), transparent 60%),
+      radial-gradient(ellipse 55% 50% at 72% 88%, rgba(150,190,255,.20), transparent 62%),
+      radial-gradient(ellipse 45% 40% at 8% 80%, rgba(255,170,140,.16), transparent 60%),
+      var(--bg);
+  }
+  .bg-mesh::before, .bg-mesh::after{
+    content:''; position:absolute; border-radius:50%; filter:blur(90px); opacity:.55;
+  }
+  .bg-mesh::before{
+    width:520px; height:520px; top:-140px; inset-inline-start:-120px;
+    background:radial-gradient(circle, rgba(255,196,110,.5), transparent 70%);
+    animation:blobFloat 22s ease-in-out infinite alternate;
+  }
+  .bg-mesh::after{
+    width:600px; height:600px; bottom:-180px; inset-inline-end:-140px;
+    background:radial-gradient(circle, rgba(126,214,199,.45), transparent 70%);
+    animation:blobFloat 26s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes blobFloat{
+    from{ transform:translate(0,0) scale(1); }
+    to{ transform:translate(60px,40px) scale(1.12); }
+  }
+  h1,h2,h3,.display{
+    font-family:'Almarai', sans-serif;
+    font-weight:800;
+  }
+  h2{font-size:1.6rem;}
+  h3{font-size:1.2rem;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  .track{
+    position:relative; height:44px; width:100%;
+    display:flex; align-items:center; overflow:hidden;
+  }
+  .track::before{
+    content:''; position:absolute; inset:0; top:50%; height:2px; transform:translateY(-50%);
+    background:repeating-linear-gradient(90deg, var(--accent) 0 26px, transparent 26px 46px);
+    opacity:.55;
+    animation:trackScroll 3.2s linear infinite;
+  }
+  @keyframes trackScroll{ from{background-position-x:0;} to{background-position-x:-46px;} }
+  .track span{
+    position:relative; padding:6px 16px; border-radius:100px;
+    background:rgba(255,255,255,.75); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(34,49,58,.1);
+    font-family:'Almarai', sans-serif; font-weight:700; font-size:.72rem;
+    letter-spacing:.12em; color:var(--muted); margin-inline-start:24px;
+  }
+  @media(max-width:480px){
+    .track span{font-size:.85rem; letter-spacing:.06em; padding:0 10px;}
+  }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.55);
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    border-bottom:1px solid rgba(255,255,255,.7);
+    transition:box-shadow .3s ease, background .3s ease;
+  }
+  header.scrolled{ background:rgba(255,255,255,.75); }
+  header.scrolled{ box-shadow:0 12px 28px -18px rgba(34,49,58,.22); }
+  .scroll-progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:linear-gradient(90deg, var(--accent), var(--accent-2));
+    z-index:100; transition:width .1s linear;
+  }
+  .pkg-card.selected{
+    border-color:var(--accent); box-shadow:0 0 0 1px var(--accent), 0 16px 32px -16px rgba(217,142,35,.3);
+  }
+  .pkg-card.selected .pkg-stage::after{
+    content:' · ✓'; color:var(--accent);
+  }
+  nav{
+    max-width:1120px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; gap:16px;
+  }
+  .logo{
+    font-family:'Almarai',sans-serif; font-weight:800; font-size:1.15rem;
+    letter-spacing:.04em; text-transform:uppercase; white-space:nowrap;
+  }
+  .logo em{color:var(--accent); font-style:normal;}
+  .nav-links{display:flex; gap:28px; font-size:1.02rem; font-weight:500; color:var(--muted);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a.active{color:var(--accent); font-weight:700;}
+  .nav-right{display:flex; align-items:center; gap:12px;}
+  .btn-sm{padding:9px 18px; font-size:.85rem; line-height:1;}
+  @media(max-width:760px){ .nav-links{display:none;} }
+  .hamburger{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    width:34px; height:34px; background:transparent; border:none; cursor:pointer; padding:0;
+  }
+  .hamburger span{ display:block; width:100%; height:2.5px; background:var(--text); border-radius:2px; transition:transform .25s ease, opacity .25s ease; }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  .mobile-nav{
+    max-height:0; overflow:hidden; display:flex; flex-direction:column;
+    background:rgba(255,255,255,.85); border-bottom:1px solid rgba(255,255,255,.7);
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    transition:max-height .3s ease;
+  }
+  .mobile-nav a{
+    padding:16px 24px; color:var(--text); font-weight:500; font-size:1rem;
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-nav a:last-child{border-bottom:none;}
+  .mobile-nav.open{max-height:300px;}
+  @media(max-width:760px){ .hamburger{display:flex;} }
+  @media(min-width:761px){ .mobile-nav{display:none;} }
+  @media(max-width:480px){
+    nav{padding:12px 16px; gap:8px;}
+    .logo{font-size:.8rem; letter-spacing:.02em;}
+    .nav-right{gap:8px;}
+    .nav-right .btn-sm{padding:7px 14px; font-size:.74rem;}
+  }
+
+  .hero{
+    max-width:800px; margin:0 auto; padding:90px 24px 60px;
+    text-align:center;
+  }
+  .hero .btn-row{justify-content:center;}
+  .hero .bib{margin-inline:auto; width:fit-content;}
+  .hero p{margin-inline:auto;}
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);} }
+  .hero .bib{animation:fadeUp .7s ease both;}
+  .hero h1{animation:fadeUp .7s ease .1s both;}
+  .hero p{animation:fadeUp .7s ease .2s both;}
+  .hero .btn-row{animation:fadeUp .7s ease .3s both;}
+  .bib{
+    display:inline-flex; align-items:center; gap:10px;
+    border:1px solid var(--glass-border); border-radius:100px; padding:8px 18px;
+    font-size:.8rem; color:var(--accent-2); margin-bottom:26px;
+    background:var(--glass-bg); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  }
+  .bib::before{content:'●'; color:var(--accent); font-size:.6rem;}
+  .hero h1{ font-size:clamp(2.2rem, 4.5vw, 3.4rem); line-height:1.25; margin-bottom:20px; }
+  .hero h1 .hl{color:var(--accent); position:relative; display:inline-block;}
+  .hero h1 .hl::after{
+    content:''; position:absolute; right:0; left:0; bottom:-2px; height:3px;
+    background:linear-gradient(90deg, var(--accent), rgba(217,142,35,.15));
+    border-radius:2px;
+  }
+  .hero p{color:var(--muted); font-size:1.05rem; max-width:46ch; margin-bottom:32px;}
+  .rt-accent{color:var(--accent); font-weight:800;}
+  .rt-accent2{color:var(--accent-2); font-weight:800;}
+  .rt-strong{color:var(--text); font-weight:800;}
+  .rt-muted{color:var(--muted); font-weight:400;}
+  .btn-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    padding:14px 28px; border-radius:100px; font-weight:600; font-size:.95rem;
+    display:inline-block; cursor:pointer; border:none; white-space:nowrap; flex-shrink:0;
+    transition:transform .2s ease, box-shadow .2s ease, filter .2s ease, border-color .2s ease;
+    font-family:inherit;
+  }
+  .btn-primary{background:var(--accent); color:#FFFFFF;}
+  .btn-primary:hover{filter:brightness(1.08); transform:translateY(-2px); box-shadow:0 10px 26px -10px rgba(217,142,35,.5);}
+  .btn-ghost{
+    background:rgba(255,255,255,.6); border:1px solid rgba(34,49,58,.14); color:var(--text);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  }
+  .btn-ghost:hover{border-color:var(--accent-2); transform:translateY(-2px);}
+
+  .stat-panel{
+    background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:var(--radius);
+    padding:40px 34px; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    box-shadow:var(--glass-shadow);
+  }
+  .cta-glow{overflow:hidden;}
+  .cta-glow::before{
+    content:''; position:absolute; inset:-40%; z-index:0;
+    background:radial-gradient(circle, rgba(255,196,110,.35), transparent 60%);
+    animation:ctaPulse 3.4s ease-in-out infinite;
+  }
+  .cta-glow > *{position:relative; z-index:1;}
+  @keyframes ctaPulse{ 0%,100%{opacity:.6; transform:scale(.9);} 50%{opacity:1; transform:scale(1.05);} }
+  .stat-panel .row{ display:flex; justify-content:space-between; align-items:baseline; padding:16px 0; border-bottom:1px dashed var(--line); }
+  .stat-panel .row:last-child{border-bottom:none;}
+  .stat-panel .num{font-family:'Almarai',sans-serif; font-weight:800; font-size:1.6rem; color:var(--accent);}
+  .stat-panel .lbl{color:var(--muted); font-size:.88rem;}
+
+  section{max-width:1120px; margin:0 auto; padding:92px 24px;}
+  @media(max-width:560px){
+    section{padding:72px 20px;}
+    .hero{padding:72px 20px 48px;}
+    .pkg-grid{gap:24px;}
+    .flow{gap:32px;}
+    .section-head{margin-bottom:36px;}
+    body{line-height:1.9;}
+  }
+  .eyebrow{ color:var(--accent-2); font-weight:700; font-size:.85rem; letter-spacing:.08em; margin-bottom:10px; display:block; }
+  .section-head{max-width:60ch; margin-bottom:48px;}
+  .section-head h2, .section-title{font-size:clamp(2rem,4.2vw,2.9rem); margin-bottom:14px; line-height:1.2;}
+  .section-head p{color:var(--muted);}
+
+  .field select{
+    -webkit-appearance:none; appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%235F7276'><path d='M5 7l5 5 5-5z'/></svg>");
+    background-repeat:no-repeat;
+    background-size:16px;
+    color:var(--text);
+  }
+  .field select option{
+    background:#FFFFFF; color:#22313A; font-family:'Almarai', sans-serif;
+  }
+  [dir="rtl"] .field select{ background-position:left 14px center; padding-inline-end:14px; padding-inline-start:36px; }
+  [dir="ltr"] .field select{ background-position:right 14px center; padding-inline-end:36px; padding-inline-start:14px; }
+
+  .about-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:48px; align-items:center; }
+  .coach-photo{
+    width:300px; height:300px; border-radius:50%; margin:0 auto;
+    background:linear-gradient(160deg, #FFFFFF, #EFF4F2);
+    border:3px solid var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--muted); font-size:.85rem; text-align:center; padding:20px;
+    overflow:hidden;
+  }
+  .coach-photo img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .coach-photo:hover img{ transform:scale(1.045); }
+  .form-section-title{
+    font-family:'Almarai',sans-serif; font-weight:700; font-size:.85rem;
+    color:var(--accent-2); margin:26px 0 14px; letter-spacing:.04em;
+  }
+  .form-section-title:first-child{margin-top:0;}
+  .cred-list{list-style:none; margin-top:22px; display:flex; flex-direction:column; gap:14px;}
+  .cred-list li{display:flex; gap:12px; align-items:flex-start; color:var(--muted); font-size:.95rem;}
+  .cred-list li::before{content:'—'; color:var(--accent); flex-shrink:0;}
+
+  .pkg-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media(max-width:1000px){.pkg-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr; gap:22px;} .hero{grid-template-columns:1fr;} .coach-photo{width:220px; height:220px;}}
+  @media(max-width:560px){.pkg-grid{grid-template-columns:1fr;}}
+  ul.pain-list li::before{content:'✕'; color:#c0574a;}
+  .pkg-card{
+    background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:var(--radius);
+    padding:38px 30px; display:flex; flex-direction:column; position:relative;
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    box-shadow:var(--glass-shadow);
+    transition:border-color .25s, transform .25s, box-shadow .25s, background .25s;
+  }
+  .pkg-card:hover{ background:rgba(255,255,255,.75); }
+  .pkg-card:hover{border-color:var(--accent-2); transform:translateY(-6px); box-shadow:0 16px 32px -16px rgba(46,140,126,.3);}
+  .pkg-card.featured{border-color:var(--accent);}
+  .pkg-card.featured:hover{box-shadow:0 16px 32px -16px rgba(217,142,35,.35);}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+  .pkg-grid .pkg-card:nth-child(1){transition-delay:0s;}
+  .pkg-grid .pkg-card:nth-child(2){transition-delay:.08s;}
+  .pkg-grid .pkg-card:nth-child(3){transition-delay:.16s;}
+  .pkg-grid .pkg-card:nth-child(4){transition-delay:.24s;}
+  .about-grid > div:nth-child(2){transition-delay:.12s;}
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--accent); outline-offset:3px;
+  }
+  .btn:active{transform:translateY(0) scale(.97);}
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{ animation:none !important; transition:none !important; }
+    .reveal{ opacity:1 !important; transform:none !important; }
+  }
+  .pkg-tag{
+    position:absolute; top:-13px; inset-inline-end:26px;
+    background:var(--accent); color:#1A140A; font-size:.72rem; font-weight:700;
+    padding:4px 12px; border-radius:100px;
+  }
+  .pkg-stage{
+    font-family:'Almarai',sans-serif; font-weight:800; color:var(--accent-2);
+    font-size:.8rem; letter-spacing:.1em; margin-bottom:10px;
+  }
+  .pkg-card h3{font-size:1.3rem; margin-bottom:6px;}
+  .pkg-card .price{font-family:'Almarai',sans-serif; font-weight:800; font-size:2rem; margin:14px 0 18px;}
+  .pkg-card .price span{font-size:.9rem; color:var(--muted); font-weight:500; font-family:'Almarai', sans-serif;}
+  .pkg-feat{list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:26px; flex-grow:1;}
+  .pkg-feat li{font-size:.9rem; color:var(--muted); display:flex; gap:8px;}
+  .pkg-feat li::before{content:'✓'; color:var(--accent-2); font-weight:700;}
+  .pkg-card .btn{width:100%; text-align:center;}
+
+  .flow{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  @media(max-width:860px){.flow{grid-template-columns:1fr;}}
+  .form-card, .pay-card{
+    background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:var(--radius);
+    padding:42px 38px; backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    box-shadow:var(--glass-shadow);
+  }
+  @media(max-width:560px){ .form-card, .pay-card{ padding:30px 22px; } }
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:.85rem; color:var(--muted); margin-bottom:7px;}
+  .field input, .field select, .field textarea{
+    width:100%; background:rgba(255,255,255,.7); border:1px solid rgba(34,49,58,.14);
+    border-radius:12px; padding:13px 16px; color:var(--text); font-family:inherit; font-size:.95rem;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .field input:hover, .field select:hover, .field textarea:hover{ background:rgba(255,255,255,.9); }
+  .field input::placeholder, .field textarea::placeholder{ color:#9AA9AC; }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--accent-2);}
+  .field input.invalid, .field select.invalid{border-color:#c0574a; outline:2px solid #c0574a33;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media(max-width:500px){.two-col{grid-template-columns:1fr;}}
+
+  .pay-disabled{ opacity:.4; pointer-events:none; cursor:not-allowed; }
+  .sum-row{display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px dashed var(--line); color:var(--muted); font-size:.92rem;}
+  .sum-row.total{color:var(--text); font-weight:700; border-bottom:none; font-size:1.05rem; padding-top:16px;}
+  .pay-note{
+    margin-top:20px; font-size:.82rem; color:var(--muted);
+    border-inline-start:2px solid var(--accent-2); padding-inline-start:12px;
+  }
+  .terms-box{
+    margin-top:22px; padding:18px 20px; border-radius:14px;
+    background:rgba(255,255,255,.5); border:1px solid rgba(34,49,58,.1);
+  }
+  .terms-title{ font-weight:800; font-size:.9rem; margin-bottom:10px; color:var(--text); }
+  .terms-list{ list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+  .terms-list li{ font-size:.83rem; color:var(--muted); display:flex; gap:8px; line-height:1.6; }
+  .terms-list li::before{ content:'•'; color:var(--accent-2); font-weight:800; flex-shrink:0; }
+  .terms-check{ display:flex; align-items:center; gap:10px; cursor:pointer; font-size:.87rem; font-weight:700; color:var(--text); }
+  .terms-check input{ width:18px; height:18px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+
+  .contact-box{
+    background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:var(--radius);
+    padding:30px 34px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px;
+    backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+    box-shadow:var(--glass-shadow);
+  }
+  .contact-links{display:flex; gap:10px; flex-wrap:wrap;}
+  .contact-links .btn{padding:10px 20px; font-size:.85rem;}
+  .contact-icon-btn{ display:inline-flex; align-items:center; gap:8px; }
+  .contact-icon-btn svg{ width:17px; height:17px; fill:currentColor; flex-shrink:0; }
+  #contact{padding-top:36px; padding-bottom:36px;}
+
+  footer{ border-top:1px solid var(--line); padding:32px 24px; text-align:center; color:var(--muted); font-size:.85rem; }
+  .footer-credit{ margin-top:10px; font-size:.8rem; }
+  .footer-credit a{ color:var(--accent); font-weight:600; transition:color .2s ease; }
+  .footer-credit a:hover{ color:var(--accent-2); }
+
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(34,49,58,.35); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; z-index:200; padding:24px;
+  }
+  .modal-card{
+    background:rgba(255,255,255,.8); border:1px solid rgba(255,255,255,.9); border-radius:22px;
+    padding:48px 38px; max-width:400px; width:100%; text-align:center;
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    box-shadow:0 20px 60px rgba(34,49,58,.2);
+    animation:modalPop .25s ease;
+  }
+  @keyframes modalPop{ from{opacity:0; transform:scale(.92);} to{opacity:1; transform:scale(1);} }
+  .modal-check{
+    width:64px; height:64px; border-radius:50%; background:var(--accent-2); color:#FFFFFF;
+    display:flex; align-items:center; justify-content:center; font-size:1.8rem; font-weight:800;
+    margin:0 auto 20px;
+  }
+  .modal-card h3{font-size:1.4rem; margin-bottom:12px;}
+  .modal-card p{color:var(--muted); font-size:.92rem; line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="bg-mesh" aria-hidden="true"></div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header>
+  <nav>
+    <div class="logo">Coach<em> Abdulmonem</em></div>
+    <div class="nav-links">
+      <a href="#about" data-i18n="nav.about">عن الكوتش</a>
+      <a href="#packages" data-i18n="nav.packages">الباقات</a>
+      <a href="#register" data-i18n="nav.register">التسجيل</a>
+      <a href="#contact" data-i18n="nav.contact">تواصل</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-ghost btn-sm" id="langToggle" onclick="toggleLang()">English</button>
+      <a href="#packages" class="btn btn-primary btn-sm" data-i18n="nav.cta">ابدأ الآن</a>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about" data-i18n="nav.about" onclick="closeMobileNav()">عن الكوتش</a>
+    <a href="#packages" data-i18n="nav.packages" onclick="closeMobileNav()">الباقات</a>
+    <a href="#register" data-i18n="nav.register" onclick="closeMobileNav()">التسجيل</a>
+    <a href="#contact" data-i18n="nav.contact" onclick="closeMobileNav()">تواصل</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="bib" data-i18n="hero.bib">تدريب شخصي معتمد · مسقط، عُمان</div>
+    <h1><span data-i18n="hero.title">تعبت من الالتزام والدايت </span><span class="hl" data-i18n="hero.title.hl">وما تشوف نتايج ترضيك؟</span></h1>
+    <p><span class="rt-accent" data-i18n="hero.sub1">تعال، ابدأ عندي</span><span class="rt-muted" data-i18n="hero.sub2"> وبقولك ليش. </span><span class="rt-strong" data-i18n="hero.sub3">برنامج يراعي حياتك وشغلك،</span><span class="rt-accent2" data-i18n="hero.sub4"> بطريقة سهلة ومختصرة وعلمية</span><span class="rt-muted" data-i18n="hero.sub5"> تقدر تلتزم فيها لين توصل لهدفك.</span></p>
+    <div class="btn-row">
+      <a href="#packages" class="btn btn-primary" data-i18n="hero.cta1">شوف الباقات</a>
+      <a href="#about" class="btn btn-ghost" data-i18n="hero.cta2">تعرف على الكوتش</a>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="padding-top:0;">
+  <div class="about-grid">
+    <div>
+      <span class="eyebrow" data-i18n="why.eyebrow">وش تعاني منه</span>
+      <h2 class="section-title" data-i18n="why.title">إذا تحس بأي من هذي، أنت مو لحالك</h2>
+      <ul class="cred-list pain-list" style="margin-top:22px;">
+        <li data-i18n="why.p1">تستحي من جسمك</li>
+        <li data-i18n="why.p2">تلبس أوفر سايز عشان تغطي</li>
+        <li data-i18n="why.p3">خايف من تعليقات الناس</li>
+        <li data-i18n="why.p4">ما تعرف من وين تبدأ بالضبط</li>
+        <li data-i18n="why.p5">جربت قبل ووقفت بسرعة</li>
+      </ul>
+    </div>
+    <div class="stat-panel cta-glow" style="text-align:center; position:relative;">
+      <p class="display" style="font-size:1.4rem; color:var(--accent); margin-bottom:14px;" data-i18n="why.cta1">تعال، ابدأ عندي</p>
+      <p style="margin-bottom:22px;"><span class="rt-strong" data-i18n="why.cta2a">أقدر أحولك وأغيرك</span><span class="rt-accent" data-i18n="why.cta2b"> لأفضل نسخة من نفسك</span><span class="rt-muted" data-i18n="why.cta2c"> — بطريقة </span><span class="rt-accent2" data-i18n="why.cta2d">سهلة، مختصرة، بسيطة، وعلمية.</span></p>
+      <a href="#packages" class="btn btn-primary" data-i18n="why.cta3">شوف الباقات</a>
+    </div>
+  </div>
+</section>
+
+<div class="track"><span data-i18n="track.about">عن الكوتش</span></div>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="coach-photo reveal"><img src="coach-photo.jpg" alt="Abdulmonem Al Badi"></div>
+    <div>
+      <span class="eyebrow" data-i18n="about.eyebrow">مين الكوتش</span>
+      <h2 class="section-title" data-i18n="about.title">عبدالمنعم — عانيت وجربت، واليوم بختصر عليك الطريق</h2>
+      <p style="margin-top:10px;">
+        <span class="rt-accent" data-i18n="about.body1">عانيت من الوزن الزايد</span><span class="rt-muted" data-i18n="about.body2"> وجربت كل الطرق اللي ممكن تخطر على بالك عشان أضعف وآكل اللي يخطرلي فيه. </span><span class="rt-strong" data-i18n="about.body3">اليوم أجيك من تجربة كبيرة،</span><span class="rt-muted" data-i18n="about.body4"> وبختصر عليك الوقت والجهد. </span><span class="rt-accent2" data-i18n="about.body5">لا تطبّق كلامي بس، طبّق العلم اللي بعطيك إياه،</span><span class="rt-accent" data-i18n="about.body6"> واستمتع بالنتيجة.</span>
+      </p>
+      <ul class="cred-list">
+        <li data-i18n="about.cred1">برنامج يراعي طبيعة حياتك وشغلك، مو نسخة واحدة تنطبق على الكل</li>
+        <li data-i18n="about.cred2">يضبط لك الأكل اللي تحبه ضمن خطتك، مب حرمان</li>
+        <li data-i18n="about.cred3">تستقبل أسئلتك واستفساراتك أول بأول</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="track"><span data-i18n="track.how">شلون بنشتغل</span></div>
+
+<section id="how">
+  <div class="about-grid">
+    <div>
+      <span class="eyebrow" data-i18n="how.eyebrow">تعال أخبرك عن برامجي</span>
+      <h2 class="section-title" data-i18n="how.title">إذا ما عندك الهمة والإرادة، لا تكمل</h2>
+      <ul class="pkg-feat" style="margin-top:22px;">
+        <li data-i18n="how.f1">برنامجي يراعي طبيعة حياتك اليومية وشغلك</li>
+        <li data-i18n="how.f2">جدول تمارين مبني على وضعك الحالي</li>
+        <li data-i18n="how.f3">يضبط لك الأكلات اللي تحبها ضمن الدايت</li>
+        <li data-i18n="how.f4">تستقبل يومياً كل أسئلتك واستفساراتك</li>
+        <li data-i18n="how.f5">متابعة ومكالمات دورية نشوف فيها التطور وخطة المرحلة الجاية</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow" data-i18n="need.eyebrow">وش بنحتاج</span>
+      <h2 data-i18n="need.title">أدوات بسيطة تسهّل علينا المتابعة</h2>
+      <ul class="cred-list" style="margin-top:22px;">
+        <li data-i18n="need.f1">ميزان أكل (مهم لضبط الحصص)</li>
+        <li data-i18n="need.f2">ميزان لوزن الجسم</li>
+        <li data-i18n="need.f3">شريط قياس</li>
+        <li data-i18n="need.f4">ساعة أو سوار يحسب خطواتك اليومية</li>
+        <li data-i18n="need.f5">مكملات بروتين حسب احتياجك (لو لزم)</li>
+        <li data-i18n="need.f6">كرياتين ومغنيسيوم (حسب الحالة)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="track"><span data-i18n="track.packages">الباقات</span></div>
+
+<section id="packages">
+  <div class="section-head reveal">
+    <span class="eyebrow" data-i18n="pkg.eyebrow">شووف عندي كم باقة</span>
+    <h2 data-i18n="pkg.title">وانت وراحتك، عاد اختر</h2>
+    <p><span class="rt-strong" data-i18n="pkg.sub1">كل باقة تشمل</span><span class="rt-accent2" data-i18n="pkg.sub2"> جدول تمرين وجدول غذائي ومتابعة مستمرة،</span><span class="rt-muted" data-i18n="pkg.sub3"> والفرق بس في مدة المتابعة والسعر.</span></p>
+  </div>
+  <div class="pkg-grid">
+    <div class="pkg-card reveal">
+      <div class="pkg-stage" data-i18n="pkg1.stage">الباقة الأولى</div>
+      <h3 data-i18n="pkg1.name">باقة شهر</h3>
+      <div class="price">35 <span data-i18n="pkg.unit1">ر.ع / شهر واحد</span></div>
+      <ul class="pkg-feat">
+        <li data-i18n="pkg1.f1">جدول تمرين مخصص</li>
+        <li data-i18n="pkg1.f2">جدول غذائي (دايت)</li>
+        <li data-i18n="pkg1.f3">متابعة ومكالمات دورية</li>
+        <li data-i18n="pkg1.f4">استقبال أسئلتك عن التغذية والرياضة على طول</li>
+      </ul>
+      <a href="#register" class="btn btn-ghost" onclick="selectPackage('pkg1')" data-i18n="pkg.choose">اختر هذي الباقة</a>
+    </div>
+    <div class="pkg-card reveal">
+      <div class="pkg-stage" data-i18n="pkg2.stage">الباقة الثانية</div>
+      <h3 data-i18n="pkg2.name">باقة شهرين</h3>
+      <div class="price">60 <span data-i18n="pkg.unit2">ر.ع / شهرين</span></div>
+      <ul class="pkg-feat">
+        <li data-i18n="pkg2.f1">كل مزايا باقة الشهر</li>
+        <li data-i18n="pkg2.f2">وقت أطول لتثبيت العادات والنتائج</li>
+        <li data-i18n="pkg2.f3">تعديل الجداول حسب تطورك</li>
+        <li data-i18n="pkg2.f4">سعر أوفر من الاشتراك شهر بشهر</li>
+      </ul>
+      <a href="#register" class="btn btn-ghost" onclick="selectPackage('pkg2')" data-i18n="pkg.choose">اختر هذي الباقة</a>
+    </div>
+    <div class="pkg-card featured reveal">
+      <div class="pkg-tag" data-i18n="pkg3.tag">الأكثر طلباً</div>
+      <div class="pkg-stage" data-i18n="pkg3.stage">الباقة الثالثة</div>
+      <h3 data-i18n="pkg3.name">باقة 3 شهور</h3>
+      <div class="price">85 <span data-i18n="pkg.unit3">ر.ع / 3 شهور</span></div>
+      <ul class="pkg-feat">
+        <li data-i18n="pkg3.f1">كل مزايا الباقات السابقة</li>
+        <li data-i18n="pkg3.f2">المدة المثالية لتحول واضح وملموس</li>
+        <li data-i18n="pkg3.f3">تتبع القياسات والتقدم بالصور</li>
+        <li data-i18n="pkg3.f4">أفضل قيمة مقابل السعر</li>
+      </ul>
+      <a href="#register" class="btn btn-primary" onclick="selectPackage('pkg3')" data-i18n="pkg.choose">اختر هذي الباقة</a>
+    </div>
+    <div class="pkg-card reveal">
+      <div class="pkg-stage" data-i18n="pkg4.stage">الباقة الرابعة</div>
+      <h3 data-i18n="pkg4.name">استشارة فقط</h3>
+      <div class="price">20 <span data-i18n="pkg.unitOnce">ر.ع / مرة واحدة</span></div>
+      <ul class="pkg-feat">
+        <li data-i18n="pkg4.f1">مكالمة استشارية واحدة</li>
+        <li data-i18n="pkg4.f2">أعطيك الجدول اللي يناسب وضعك وأمورك الصحية</li>
+        <li data-i18n="pkg4.f3">مناسبة لو تبي تبدأ بنفسك بس تحتاج التوجيه الصح</li>
+      </ul>
+      <a href="#register" class="btn btn-ghost" onclick="selectPackage('pkg4')" data-i18n="pkg.choose">اختر هذي الباقة</a>
+    </div>
+  </div>
+  </section>
+
+<div class="track"><span data-i18n="track.register">التسجيل والدفع</span></div>
+
+<section id="register">
+  <div class="section-head reveal">
+    <span class="eyebrow" data-i18n="reg.eyebrow">آخر خطوة</span>
+    <h2 data-i18n="reg.title">سجّل بياناتك وأكمل الدفع</h2>
+    <p><span class="rt-strong" data-i18n="reg.sub1">بعد التسجيل بتتواصل معك</span><span class="rt-accent" data-i18n="reg.sub2"> خلال 24 ساعة</span><span class="rt-muted" data-i18n="reg.sub3"> لتحديد أول جلسة.</span></p>
+  </div>
+  <div class="flow">
+    <div class="form-card">
+      <h3 style="margin-bottom:6px; font-size:1.1rem;" data-i18n="reg.formTitle">بياناتك الشخصية</h3>
+      <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;" data-i18n="reg.formSub">كل هذي المعلومات تساعدني أفهم حالتك وأبني لك برنامج مضبوط من أول يوم.</p>
+
+      <div class="form-section-title" data-i18n="reg.sec1">المعلومات الأساسية</div>
+      <div class="two-col">
+        <div class="field"><label for="f_name" data-i18n="reg.name">الاسم الكامل *</label> <input id="f_name" type="text" placeholder="مثال: محمد الحارثي" data-i18n-placeholder="ph.name"></div>
+        <div class="field"><label for="f_age" data-i18n="reg.age">العمر *</label> <input id="f_age" type="number" placeholder="24"></div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label for="f_gender" data-i18n="reg.gender">الجنس *</label> <select id="f_gender"><option data-i18n="reg.male">ذكر</option><option data-i18n="reg.female">أنثى</option></select>
+        </div>
+        <div class="field"><label for="f_phone" data-i18n="reg.phone">رقم التواصل (واتساب) *</label> <input id="f_phone" type="tel" placeholder="9XXXXXXX" maxlength="8" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,8)"></div>
+      </div>
+      <div class="two-col">
+        <div class="field"><label for="f_email" data-i18n="reg.email">البريد الإلكتروني *</label> <input id="f_email" type="email" placeholder="example@email.com"></div>
+        <div class="field"><label for="f_city" data-i18n="reg.city">المدينة</label> <input id="f_city" type="text" placeholder="مثال: مسقط" data-i18n-placeholder="ph.city"></div>
+      </div>
+
+      <div class="form-section-title" data-i18n="reg.sec2">القياسات الجسدية</div>
+      <div class="two-col">
+        <div class="field"><label for="f_height" data-i18n="reg.height">الطول (سم)</label> <input id="f_height" type="number" placeholder="175"></div>
+        <div class="field"><label for="f_weight" data-i18n="reg.weight">الوزن الحالي (كجم)</label> <input id="f_weight" type="number" placeholder="80"></div>
+      </div>
+      <div class="field"><label for="f_targetWeight" data-i18n="reg.targetWeight">الوزن المستهدف (اختياري)</label> <input id="f_targetWeight" type="number" placeholder="72"></div>
+
+      <div class="form-section-title" data-i18n="reg.sec3">الصحة ونمط الحياة</div>
+      <div class="field"><label for="f_health" data-i18n="reg.health">ملاحظات صحية أو إصابات (إن وجدت)</label> <textarea id="f_health" rows="2" placeholder="مثال: إصابة سابقة بالركبة" data-i18n-placeholder="ph.health"></textarea></div>
+      <div class="two-col">
+        <div class="field"><label for="f_meds" data-i18n="reg.meds">أدوية تأخذها حالياً</label> <input id="f_meds" type="text" placeholder="لا يوجد" data-i18n-placeholder="ph.none"></div>
+        <div class="field"><label for="f_allergy" data-i18n="reg.allergy">حساسية غذائية</label> <input id="f_allergy" type="text" placeholder="لا يوجد" data-i18n-placeholder="ph.none"></div>
+      </div>
+      <div class="field"><label for="f_sleep" data-i18n="reg.sleep">عدد ساعات النوم التقريبي</label> <select id="f_sleep">
+          <option data-i18n="reg.sleep1">أقل من 5 ساعات</option>
+          <option data-i18n="reg.sleep2">5–7 ساعات</option>
+          <option data-i18n="reg.sleep3">7 ساعات فأكثر</option>
+        </select>
+      </div>
+
+      <div class="form-section-title" data-i18n="reg.sec4">الهدف والتدريب</div>
+      <div class="field"><label for="f_goal" data-i18n="reg.goal">هدفك الرياضي *</label> <select id="f_goal">
+          <option data-i18n="reg.goal1">زيادة الوزن مع بناء العضل</option>
+          <option data-i18n="reg.goal2">نزول الوزن مع بناء العضل</option>
+          <option data-i18n="reg.goal3">أبي أتعلم أساسيات المجال</option>
+          <option data-i18n="reg.goal4">ما أدري وش هدفي بالضبط، درّبني وعلّمني من الصفر</option>
+        </select>
+      </div>
+      <div class="two-col">
+        <div class="field"><label for="f_level" data-i18n="reg.level">مستوى خبرتك التدريبية</label> <select id="f_level">
+            <option data-i18n="reg.level1">مبتدئ</option>
+            <option data-i18n="reg.level2">متوسط</option>
+            <option data-i18n="reg.level3">متقدم</option>
+          </select>
+        </div>
+        <div class="field"><label for="f_place" data-i18n="reg.place">مكان التدريب</label> <select id="f_place">
+            <option data-i18n="reg.place1">نادي رياضي</option>
+            <option data-i18n="reg.place2">منزل (بمعدات)</option>
+            <option data-i18n="reg.place3">منزل (بدون معدات)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label for="f_days" data-i18n="reg.days">كم يوم بالأسبوع تقدر تتدرب؟</label> <select id="f_days">
+          <option data-i18n="reg.days1">2–3 أيام</option>
+          <option data-i18n="reg.days2">4–5 أيام</option>
+          <option data-i18n="reg.days3">6 أيام فأكثر</option>
+        </select>
+      </div>
+      <div class="field"><label for="f_notes" data-i18n="reg.notes">أي شي تحب تذكره لي قبل ما نبدأ؟</label> <textarea id="f_notes" rows="2" placeholder="مثال: جربت أنظمة قبل ووقفت بسبب..." data-i18n-placeholder="ph.notes"></textarea></div>
+
+      <button class="btn btn-primary" style="width:100%; margin-top:6px;" onclick="goToPayment()" id="nextBtn" data-i18n="reg.next">التالي: مراجعة الدفع</button>
+      <p id="submitStatus" style="margin-top:12px; font-size:.85rem;"></p>
+    </div>
+
+    <div class="pay-card">
+      <h3 style="margin-bottom:22px; font-size:1.1rem;" data-i18n="pay.title">ملخص الدفع</h3>
+      <div class="sum-row"><span data-i18n="pay.pkg">الباقة المختارة</span><span id="sumPkgName" data-i18n="pay.pkgVal">باقة التحول</span></div>
+      <div class="sum-row"><span data-i18n="pay.duration">المدة</span><span id="sumDuration" data-i18n="pay.durationVal">3 أشهر</span></div>
+      <div class="sum-row total"><span data-i18n="pay.total">الإجمالي</span><span><span id="sumPrice">90</span> <span data-i18n="pay.currency">ر.ع</span></span></div>
+
+      <div class="terms-box">
+        <p class="terms-title" data-i18n="terms.title">شروط الاشتراك:</p>
+        <ul class="terms-list">
+          <li data-i18n="terms.t1">ألتزم بالبرنامج التدريبي وأتبع التعليمات الموجهة لي</li>
+          <li data-i18n="terms.t2">أوفر المعدات الأساسية المطلوبة للتمرين</li>
+          <li data-i18n="terms.t3">أوفر المكملات الغذائية عند الحاجة إليها</li>
+          <li data-i18n="terms.t4">أقر بعدم وجود أمراض مزمنة تمنعني من ممارسة الرياضة</li>
+          <li data-i18n="terms.t5">أعبّي بيانات المتابعة يومياً أو متى ما طُلب مني</li>
+        </ul>
+        <label class="terms-check">
+          <input type="checkbox" id="termsAgree">
+          <span data-i18n="terms.agree">قرأت وأوافق على جميع الشروط أعلاه</span>
+        </label>
+      </div>
+
+      <button class="btn btn-primary pay-disabled" id="payBtn" style="width:100%; text-align:center; margin-top:20px; display:block;" onclick="completePayment()" data-i18n="pay.btn">
+        الدفع عبر ثواني (بطاقة بنكية)
+      </button>
+      <p id="payHint" style="margin-top:10px; font-size:.8rem; color:var(--muted);" data-i18n="pay.hint">عبّي بياناتك بالفورم واضغط "التالي" أول عشان يتفعّل الدفع.</p>
+      <p class="pay-note" data-i18n="pay.note">
+        الدفع يتم عبر رابط دفع آمن من ثواني — تقدر تدفع ببطاقة فيزا أو ماستركارد مباشرة بدون الحاجة لحساب ثواني.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="successSummary" style="display:none;">
+  <div class="section-head reveal">
+    <span class="eyebrow" data-i18n="sum.eyebrow">تم كل شي</span>
+    <h2 class="section-title"><span data-i18n="sum.title">يا هلا فيك، </span><span id="sumUserName"></span> 👋</h2>
+    <p data-i18n="sum.sub">سجّلنا بياناتك وأكملت الدفع بنجاح. بتتواصل معك خلال 24 ساعة لتحديد أول جلسة.</p>
+  </div>
+  <div class="flow">
+    <div class="form-card">
+      <h3 style="margin-bottom:18px; font-size:1.1rem;" data-i18n="sum.detailsTitle">ملخص بياناتك</h3>
+      <div class="sum-row"><span data-i18n="sum.name">الاسم</span><span id="rvName"></span></div>
+      <div class="sum-row"><span data-i18n="sum.phone">رقم التواصل</span><span id="rvPhone"></span></div>
+      <div class="sum-row"><span data-i18n="sum.email">البريد الإلكتروني</span><span id="rvEmail"></span></div>
+      <div class="sum-row"><span data-i18n="sum.goal">هدفك</span><span id="rvGoal"></span></div>
+      <div class="sum-row"><span data-i18n="pay.pkg">الباقة المختارة</span><span id="rvPkg"></span></div>
+      <div class="sum-row total"><span data-i18n="pay.total">الإجمالي</span><span id="rvPrice"></span></div>
+    </div>
+    <div class="pay-card" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+      <span class="eyebrow" data-i18n="sum.quoteLabel">زادك اليوم</span>
+      <p id="motivationQuote" style="font-family:'Almarai',sans-serif; font-weight:700; font-size:1.25rem; line-height:1.6; color:var(--accent); margin-top:14px;"></p>
+    </div>
+  </div>
+</section>
+
+<div class="track"><span data-i18n="track.contact">تواصل</span></div>
+
+<section id="contact">
+  <div class="contact-box reveal">
+    <div>
+      <h3 style="font-size:1.1rem; margin-bottom:6px;" data-i18n="contact.title">عندك سؤال قبل التسجيل؟</h3>
+      <p style="color:var(--muted); font-size:.9rem;" data-i18n="contact.sub">تواصل معي مباشرة وبرد عليك بأقرب وقت.</p>
+    </div>
+    <div class="contact-links">
+      <a href="https://instagram.com/monem.fit" target="_blank" rel="noopener" class="btn btn-primary contact-icon-btn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        <span data-i18n="contact.ig">إنستقرام</span>
+      </a>
+      <a href="mailto:Monem.fit@gmail.com" class="btn btn-ghost contact-icon-btn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <span data-i18n="contact.email">إيميل</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p data-i18n="footer.text">© 2026 Coach Abdulmonem — جميع الحقوق محفوظة.</p>
+  <p class="footer-credit">
+    <span data-i18n="footer.dev">صُمم وطُوّر بواسطة</span>
+    <a href="https://instagram.com/8pa8" target="_blank" rel="noopener">Ziyad Albadi</a>
+  </p>
+</footer>
+
+<div id="successModal" class="modal-overlay" style="display:none;">
+  <div class="modal-card">
+    <div class="modal-check">✓</div>
+    <h3 data-i18n="modal.title">تم الدفع بنجاح!</h3>
+    <p data-i18n="modal.body">سجّلنا بياناتك وتم تأكيد اشتراكك. بيتواصل معك عبدالمنعم خلال 24 ساعة لتحديد أول جلسة.</p>
+    <button class="btn btn-primary" style="width:100%; margin-top:20px;" onclick="closeSuccessModal()" data-i18n="modal.btn">تمام</button>
+  </div>
+</div>
+
+<script>
+const translations = {
+  ar: {
+    "nav.about":"عن الكوتش","nav.packages":"الباقات","nav.register":"التسجيل","nav.contact":"تواصل","nav.cta":"ابدأ الآن",
+    "hero.bib":"تدريب شخصي معتمد · مسقط، عُمان",
+    "hero.title":"تعبت من الالتزام والدايت ",
+    "hero.title.hl":"وما تشوف نتايج ترضيك؟",
+    "hero.sub1":"تعال، ابدأ عندي","hero.sub2":" وبقولك ليش. ","hero.sub3":"برنامج يراعي حياتك وشغلك،","hero.sub4":" بطريقة سهلة ومختصرة وعلمية","hero.sub5":" تقدر تلتزم فيها لين توصل لهدفك.",
+    "hero.cta1":"شوف الباقات","hero.cta2":"تعرف على الكوتش",
+    "track.about":"عن الكوتش","track.packages":"الباقات","track.how":"شلون بنشتغل","track.register":"التسجيل والدفع","track.contact":"تواصل",
+    "why.eyebrow":"وش تعاني منه","why.title":"إذا تحس بأي من هذي، أنت مو لحالك",
+    "why.p1":"تستحي من جسمك","why.p2":"تلبس أوفر سايز عشان تغطي","why.p3":"خايف من تعليقات الناس",
+    "why.p4":"ما تعرف من وين تبدأ بالضبط","why.p5":"جربت قبل ووقفت بسرعة",
+    "why.cta1":"تعال، ابدأ عندي",
+    "why.cta2a":"أقدر أحولك وأغيرك","why.cta2b":" لأفضل نسخة من نفسك","why.cta2c":" — بطريقة ","why.cta2d":"سهلة، مختصرة، بسيطة، وعلمية.",
+    "why.cta3":"شوف الباقات",
+    "about.eyebrow":"مين الكوتش",
+    "about.title":"عبدالمنعم — عانيت وجربت، واليوم بختصر عليك الطريق",
+    "about.body1":"عانيت من الوزن الزايد","about.body2":" وجربت كل الطرق اللي ممكن تخطر على بالك عشان أضعف وآكل اللي يخطرلي فيه. ","about.body3":"اليوم أجيك من تجربة كبيرة،","about.body4":" وبختصر عليك الوقت والجهد. ","about.body5":"لا تطبّق كلامي بس، طبّق العلم اللي بعطيك إياه،","about.body6":" واستمتع بالنتيجة.",
+    "about.cred1":"برنامج يراعي طبيعة حياتك وشغلك، مو نسخة واحدة تنطبق على الكل",
+    "about.cred2":"يضبط لك الأكل اللي تحبه ضمن خطتك، مب حرمان",
+    "about.cred3":"تستقبل أسئلتك واستفساراتك أول بأول",
+    "how.eyebrow":"تعال أخبرك عن برامجي","how.title":"إذا ما عندك الهمة والإرادة، لا تكمل",
+    "how.f1":"برنامجي يراعي طبيعة حياتك اليومية وشغلك","how.f2":"جدول تمارين مبني على وضعك الحالي",
+    "how.f3":"يضبط لك الأكلات اللي تحبها ضمن الدايت","how.f4":"تستقبل يومياً كل أسئلتك واستفساراتك",
+    "how.f5":"متابعة ومكالمات دورية نشوف فيها التطور وخطة المرحلة الجاية",
+    "need.eyebrow":"وش بنحتاج","need.title":"أدوات بسيطة تسهّل علينا المتابعة",
+    "need.f1":"ميزان أكل (مهم لضبط الحصص)","need.f2":"ميزان لوزن الجسم","need.f3":"شريط قياس",
+    "need.f4":"ساعة أو سوار يحسب خطواتك اليومية","need.f5":"مكملات بروتين حسب احتياجك (لو لزم)",
+    "need.f6":"كرياتين ومغنيسيوم (حسب الحالة)",
+    "pkg.eyebrow":"شووف عندي كم باقة","pkg.title":"وانت وراحتك، عاد اختر",
+    "pkg.sub1":"كل باقة تشمل","pkg.sub2":" جدول تمرين وجدول غذائي ومتابعة مستمرة،","pkg.sub3":" والفرق بس في مدة المتابعة والسعر.",
+    "pkg1.stage":"الباقة الأولى","pkg1.name":"باقة شهر",
+    "pkg1.f1":"جدول تمرين مخصص","pkg1.f2":"جدول غذائي (دايت)","pkg1.f3":"متابعة ومكالمات دورية","pkg1.f4":"استقبال أسئلتك عن التغذية والرياضة على طول",
+    "pkg2.stage":"الباقة الثانية","pkg2.name":"باقة شهرين",
+    "pkg2.f1":"كل مزايا باقة الشهر","pkg2.f2":"وقت أطول لتثبيت العادات والنتائج","pkg2.f3":"تعديل الجداول حسب تطورك","pkg2.f4":"سعر أوفر من الاشتراك شهر بشهر",
+    "pkg3.tag":"الأكثر طلباً","pkg3.stage":"الباقة الثالثة","pkg3.name":"باقة 3 شهور",
+    "pkg3.f1":"كل مزايا الباقات السابقة","pkg3.f2":"المدة المثالية لتحول واضح وملموس","pkg3.f3":"تتبع القياسات والتقدم بالصور","pkg3.f4":"أفضل قيمة مقابل السعر",
+    "pkg4.stage":"الباقة الرابعة","pkg4.name":"استشارة فقط",
+    "pkg4.f1":"مكالمة استشارية واحدة","pkg4.f2":"أعطيك الجدول اللي يناسب وضعك وأمورك الصحية","pkg4.f3":"مناسبة لو تبي تبدأ بنفسك بس تحتاج التوجيه الصح",
+    "pkg.unit1":"ر.ع / شهر واحد","pkg.unit2":"ر.ع / شهرين","pkg.unit3":"ر.ع / 3 شهور","pkg.unitOnce":"ر.ع / مرة واحدة","pkg.choose":"اختر هذي الباقة",
+    "reg.eyebrow":"آخر خطوة","reg.title":"سجّل بياناتك وأكمل الدفع","reg.sub1":"بعد التسجيل بتتواصل معك","reg.sub2":" خلال 24 ساعة","reg.sub3":" لتحديد أول جلسة.",
+    "reg.formTitle":"بياناتك الشخصية",
+    "reg.formSub":"كل هذي المعلومات تساعدني أفهم حالتك وأبني لك برنامج مضبوط من أول يوم.",
+    "reg.sec1":"المعلومات الأساسية","reg.sec2":"القياسات الجسدية","reg.sec3":"الصحة ونمط الحياة","reg.sec4":"الهدف والتدريب",
+    "reg.name":"الاسم الكامل *","reg.age":"العمر *","reg.gender":"الجنس *",
+    "reg.male":"ذكر","reg.female":"أنثى","reg.phone":"رقم التواصل (واتساب) *",
+    "reg.email":"البريد الإلكتروني *","reg.city":"المدينة",
+    "reg.height":"الطول (سم)","reg.weight":"الوزن الحالي (كجم)","reg.targetWeight":"الوزن المستهدف (اختياري)",
+    "reg.meds":"أدوية تأخذها حالياً","reg.allergy":"حساسية غذائية",
+    "reg.sleep":"عدد ساعات النوم التقريبي","reg.sleep1":"أقل من 5 ساعات","reg.sleep2":"5–7 ساعات","reg.sleep3":"7 ساعات فأكثر",
+    "reg.goal":"هدفك الرياضي *",
+    "reg.goal1":"زيادة الوزن مع بناء العضل","reg.goal2":"نزول الوزن مع بناء العضل","reg.goal3":"أبي أتعلم أساسيات المجال","reg.goal4":"ما أدري وش هدفي بالضبط، درّبني وعلّمني من الصفر",
+    "reg.level":"مستوى خبرتك التدريبية","reg.level1":"مبتدئ","reg.level2":"متوسط","reg.level3":"متقدم",
+    "reg.place":"مكان التدريب","reg.place1":"نادي رياضي","reg.place2":"منزل (بمعدات)","reg.place3":"منزل (بدون معدات)",
+    "reg.days":"كم يوم بالأسبوع تقدر تتدرب؟","reg.days1":"2–3 أيام","reg.days2":"4–5 أيام","reg.days3":"6 أيام فأكثر",
+    "reg.notes":"أي شي تحب تذكره لي قبل ما نبدأ؟",
+    "reg.next":"التالي: مراجعة الدفع",
+    "pay.hint":"عبّي بياناتك بالفورم واضغط \"التالي\" أول عشان يتفعّل الدفع.",
+    "reg.health":"ملاحظات صحية أو إصابات (إن وجدت)",
+    "pay.title":"ملخص الدفع","pay.pkg":"الباقة المختارة","pay.pkgVal":"باقة 3 شهور","pay.duration":"المدة","pay.durationVal":"3 شهور",
+    "pay.total":"الإجمالي","pay.currency":"ر.ع","pay.btn":"الدفع عبر ثواني (بطاقة بنكية)",
+    "pay.note":"الدفع يتم عبر رابط دفع آمن من ثواني — تقدر تدفع ببطاقة فيزا أو ماستركارد مباشرة بدون الحاجة لحساب ثواني.",
+    "contact.title":"عندك سؤال قبل التسجيل؟","contact.sub":"تواصل معي مباشرة وبرد عليك بأقرب وقت.",
+    "contact.email":"إيميل","contact.ig":"إنستقرام",
+    "terms.title":"شروط الاشتراك:",
+    "terms.t1":"ألتزم بالبرنامج التدريبي وأتبع التعليمات الموجهة لي",
+    "terms.t2":"أوفر المعدات الأساسية المطلوبة للتمرين",
+    "terms.t3":"أوفر المكملات الغذائية عند الحاجة إليها",
+    "terms.t4":"أقر بعدم وجود أمراض مزمنة تمنعني من ممارسة الرياضة",
+    "terms.t5":"أعبّي بيانات المتابعة يومياً أو متى ما طُلب مني",
+    "terms.agree":"قرأت وأوافق على جميع الشروط أعلاه",
+    "footer.text":"© 2026 Coach Abdulmonem — جميع الحقوق محفوظة.",
+    "footer.dev":"صُمم وطُوّر بواسطة",
+    "modal.title":"تم الدفع بنجاح!",
+    "modal.body":"سجّلنا بياناتك وتم تأكيد اشتراكك. بيتواصل معك عبدالمنعم خلال 24 ساعة لتحديد أول جلسة.",
+    "modal.btn":"تمام",
+    "sum.eyebrow":"تم كل شي","sum.title":"يا هلا فيك، ",
+    "sum.sub":"سجّلنا بياناتك وأكملت الدفع بنجاح. بتتواصل معك خلال 24 ساعة لتحديد أول جلسة.",
+    "sum.detailsTitle":"ملخص بياناتك","sum.name":"الاسم","sum.phone":"رقم التواصل","sum.email":"البريد الإلكتروني","sum.goal":"هدفك",
+    "sum.quoteLabel":"زادك اليوم",
+    "ph.name":"مثال: محمد الحارثي","ph.city":"مثال: مسقط","ph.health":"مثال: إصابة سابقة بالركبة",
+    "ph.none":"لا يوجد","ph.notes":"مثال: جربت أنظمة قبل ووقفت بسبب..."
+  },
+  en: {
+    "nav.about":"About","nav.packages":"Packages","nav.register":"Sign Up","nav.contact":"Contact","nav.cta":"Get Started",
+    "hero.bib":"Certified Personal Coach · Muscat, Oman",
+    "hero.title":"Tired of the commitment, the diet, ",
+    "hero.title.hl":"and not seeing results you're happy with?",
+    "hero.sub1":"Come start with me","hero.sub2":" and I'll show you why. ","hero.sub3":"A program that respects your life and your work —","hero.sub4":" simple, quick, and science-based,","hero.sub5":" in a way you can actually stick to.",
+    "hero.cta1":"View Packages","hero.cta2":"Meet the Coach",
+    "track.about":"About the Coach","track.packages":"Packages","track.how":"How We'll Work","track.register":"Sign Up & Pay","track.contact":"Contact",
+    "why.eyebrow":"What you're dealing with","why.title":"If any of this sounds familiar, you're not alone",
+    "why.p1":"You're self-conscious about your body","why.p2":"You wear oversized clothes to cover up","why.p3":"You're afraid of people's comments",
+    "why.p4":"You don't know exactly where to start","why.p5":"You've tried before and gave up quickly",
+    "why.cta1":"Come start with me",
+    "why.cta2a":"I can help you become","why.cta2b":" the best version of yourself","why.cta2c":" — ","why.cta2d":"simply, quickly, and based on real science.",
+    "why.cta3":"View Packages",
+    "about.eyebrow":"Who's the coach",
+    "about.title":"Abdulmonem — I struggled, I learned, now I'll save you the time",
+    "about.body1":"I struggled with extra weight","about.body2":" and tried every method you can think of to lose it and still eat what I wanted. ","about.body3":"Today I come to you from real experience,","about.body4":" and I'll save you the time and effort. ","about.body5":"Don't just follow what I say — apply the science I give you,","about.body6":" and enjoy the results.",
+    "about.cred1":"A program built around your actual life and work, not a one-size-fits-all plan",
+    "about.cred2":"Fits the food you already like into your plan — no starvation",
+    "about.cred3":"You get answers to your questions as soon as you ask",
+    "how.eyebrow":"Let me tell you about my programs","how.title":"If you don't have the drive, don't continue",
+    "how.f1":"My program respects your daily life and your work","how.f2":"A training schedule built around your current condition",
+    "how.f3":"Fits the foods you like into your diet","how.f4":"You get answers to all your questions, every day",
+    "how.f5":"Regular check-in calls to track progress and plan the next phase",
+    "need.eyebrow":"What you'll need","need.title":"A few simple tools that make follow-up easier",
+    "need.f1":"A food scale (important for portion control)","need.f2":"A body weight scale","need.f3":"A measuring tape",
+    "need.f4":"A watch or band that tracks daily steps","need.f5":"Protein supplements if needed",
+    "need.f6":"Creatine and magnesium (depending on your case)",
+    "pkg.eyebrow":"Here's what I offer","pkg.title":"Whichever pace suits you, pick your package",
+    "pkg.sub1":"Every package includes","pkg.sub2":" a training schedule, a diet plan, and ongoing follow-up —","pkg.sub3":" the difference is the subscription length and price.",
+    "pkg1.stage":"Package One","pkg1.name":"1-Month Package",
+    "pkg1.f1":"Custom training schedule","pkg1.f2":"Diet plan","pkg1.f3":"Regular follow-up & check-in calls","pkg1.f4":"Ongoing Q&A on nutrition and training",
+    "pkg2.stage":"Package Two","pkg2.name":"2-Month Package",
+    "pkg2.f1":"Everything in the 1-month package","pkg2.f2":"More time to lock in habits and results","pkg2.f3":"Schedules adjusted as you progress","pkg2.f4":"Better value than month-by-month",
+    "pkg3.tag":"Most popular","pkg3.stage":"Package Three","pkg3.name":"3-Month Package",
+    "pkg3.f1":"Everything in previous packages","pkg3.f2":"The ideal duration for a real transformation","pkg3.f3":"Progress tracking with measurements & photos","pkg3.f4":"Best value for money",
+    "pkg4.stage":"Package Four","pkg4.name":"Consultation Only",
+    "pkg4.f1":"One consultation call","pkg4.f2":"A schedule tailored to your situation and health","pkg4.f3":"Good if you want to start on your own but need the right direction",
+    "pkg.unit1":"OMR / 1 month","pkg.unit2":"OMR / 2 months","pkg.unit3":"OMR / 3 months","pkg.unitOnce":"OMR / one-time","pkg.choose":"Choose this package",
+    "reg.eyebrow":"Last step","reg.title":"Register your details and complete payment","reg.sub1":"After signing up, we'll reach out","reg.sub2":" within 24 hours","reg.sub3":" to schedule your first session.",
+    "reg.formTitle":"Your Details",
+    "reg.formSub":"This information helps me understand your situation and build the right program from day one.",
+    "reg.sec1":"Basic Information","reg.sec2":"Body Measurements","reg.sec3":"Health & Lifestyle","reg.sec4":"Goal & Training",
+    "reg.name":"Full name *","reg.age":"Age *","reg.gender":"Gender *",
+    "reg.male":"Male","reg.female":"Female","reg.phone":"Contact number (WhatsApp) *",
+    "reg.email":"Email address *","reg.city":"City",
+    "reg.height":"Height (cm)","reg.weight":"Current weight (kg)","reg.targetWeight":"Target weight (optional)",
+    "reg.meds":"Current medications","reg.allergy":"Food allergies",
+    "reg.sleep":"Average hours of sleep","reg.sleep1":"Less than 5 hours","reg.sleep2":"5–7 hours","reg.sleep3":"7+ hours",
+    "reg.goal":"Your fitness goal *",
+    "reg.goal1":"Weight gain with muscle building","reg.goal2":"Weight loss with muscle building","reg.goal3":"I want to learn the basics of fitness","reg.goal4":"I'm not sure what my goal is, train and guide me from scratch",
+    "reg.level":"Your training experience level","reg.level1":"Beginner","reg.level2":"Intermediate","reg.level3":"Advanced",
+    "reg.place":"Training location","reg.place1":"Gym","reg.place2":"Home (with equipment)","reg.place3":"Home (no equipment)",
+    "reg.days":"How many days a week can you train?","reg.days1":"2–3 days","reg.days2":"4–5 days","reg.days3":"6+ days",
+    "reg.notes":"Anything else you'd like me to know before we start?",
+    "reg.next":"Next: Review Payment",
+    "pay.hint":"Fill in your details and click \"Next\" first to activate payment.",
+    "reg.health":"Health notes or injuries (if any)",
+    "pay.title":"Payment Summary","pay.pkg":"Selected package","pay.pkgVal":"3-Month Package","pay.duration":"Duration","pay.durationVal":"3 months",
+    "pay.total":"Total","pay.currency":"OMR","pay.btn":"Pay via Thawani (bank card)",
+    "pay.note":"Payment is handled through a secure Thawani payment link — you can pay with Visa or Mastercard directly, no Thawani account needed.",
+    "contact.title":"Have a question before signing up?","contact.sub":"Reach out directly and I'll get back to you soon.",
+    "contact.email":"Email","contact.ig":"Instagram",
+    "terms.title":"Subscription Terms:",
+    "terms.t1":"I commit to the training program and follow the instructions given to me",
+    "terms.t2":"I will provide the basic equipment required for training",
+    "terms.t3":"I will provide nutritional supplements when needed",
+    "terms.t4":"I confirm I have no chronic conditions that prevent me from exercising",
+    "terms.t5":"I will fill in my follow-up data daily or whenever requested",
+    "terms.agree":"I have read and agree to all the terms above",
+    "footer.text":"© 2026 Coach Abdulmonem — All rights reserved.",
+    "footer.dev":"Designed & developed by",
+    "modal.title":"Payment Successful!",
+    "modal.body":"Your details were saved and your subscription is confirmed. Abdulmonem will reach out within 24 hours to schedule your first session.",
+    "modal.btn":"Got it",
+    "sum.eyebrow":"All done","sum.title":"Welcome aboard, ",
+    "sum.sub":"Your details were saved and payment completed successfully. We'll reach out within 24 hours to schedule your first session.",
+    "sum.detailsTitle":"Your Summary","sum.name":"Name","sum.phone":"Contact number","sum.email":"Email","sum.goal":"Your goal",
+    "sum.quoteLabel":"Today's boost",
+    "ph.name":"e.g. Mohammed Al Harthy","ph.city":"e.g. Muscat","ph.health":"e.g. previous knee injury",
+    "ph.none":"None","ph.notes":"e.g. I've tried programs before and stopped because..."
+  }
+};
+
+let currentLang = 'ar';
+
+const headerEl = document.querySelector('header');
+const progressEl = document.getElementById('scrollProgress');
+window.addEventListener('scroll', ()=>{
+  headerEl.classList.toggle('scrolled', window.scrollY > 10);
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  progressEl.style.width = (docH > 0 ? (window.scrollY / docH) * 100 : 0) + '%';
+}, {passive:true});
+
+function toggleMobileNav(){
+  document.getElementById('mobileNav').classList.toggle('open');
+  document.getElementById('hamburgerBtn').classList.toggle('open');
+}
+function closeMobileNav(){
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+}
+
+const navLinkMap = {};
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(a=>{
+  navLinkMap[a.getAttribute('href').slice(1)] = a;
+});
+const spySections = ['about','packages','register','contact'].map(id=>document.getElementById(id)).filter(Boolean);
+const spyObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    const link = navLinkMap[entry.target.id];
+    if(!link) return;
+    if(entry.isIntersecting){
+      Object.values(navLinkMap).forEach(a=>a.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+}, {rootMargin:'-40% 0px -55% 0px'});
+spySections.forEach(sec=>spyObserver.observe(sec));
+
+document.querySelectorAll('#why .about-grid > div, #about .about-grid > div, #how .about-grid > div').forEach(el=>el.classList.add('reveal'));
+
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+const quotes = {
+  ar: [
+    "النجاح مو نتيجة يوم واحد، هو تراكم قرارات صغيرة تسويها كل يوم.",
+    "جسمك يتحمل أكثر مما تتخيل، اللي يوقفك هو عقلك بس.",
+    "الانضباط هو الجسر اللي يوصلك بين هدفك وإنجازك.",
+    "كل تمرين تسويه اليوم استثمار في نسختك القادمة.",
+    "ما يهم سرعتك، المهم إنك ما توقف."
+  ],
+  en: [
+    "Success isn't a one-day result, it's small decisions repeated daily.",
+    "Your body can handle more than you think, it's your mind that gives up first.",
+    "Discipline is the bridge between your goal and your achievement.",
+    "Every workout you do today is an investment in your next self.",
+    "It doesn't matter how slow you go, what matters is you don't stop."
+  ]
+};
+let lastPayload = null;
+let quoteIndex = 0;
+
+function showSuccessModal(){
+  document.getElementById('successModal').style.display = 'flex';
+}
+
+function closeSuccessModal(){
+  document.getElementById('successModal').style.display = 'none';
+  document.getElementById('register').style.display = 'none';
+  quoteIndex = Math.floor(Math.random() * quotes.ar.length);
+  populateSummary();
+  document.getElementById('successSummary').style.display = 'block';
+  document.querySelectorAll('#successSummary .reveal').forEach(el=>el.classList.add('visible'));
+  document.getElementById('successSummary').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function populateSummary(){
+  if(!lastPayload) return;
+  document.getElementById('sumUserName').textContent = lastPayload.name;
+  document.getElementById('rvName').textContent = lastPayload.name;
+  document.getElementById('rvPhone').textContent = lastPayload.phone;
+  document.getElementById('rvEmail').textContent = lastPayload.email;
+  document.getElementById('rvGoal').textContent = lastPayload.goal;
+  document.getElementById('rvPkg').textContent = lastPayload.package;
+  document.getElementById('rvPrice').textContent = lastPayload.price + (currentLang === 'ar' ? ' ر.ع' : ' OMR');
+  document.getElementById('motivationQuote').textContent = '"' + quotes[currentLang][quoteIndex] + '"';
+}
+
+// ================== إعدادات الربط — بدّل هذي القيم بعد إنشاء حساباتك ==================
+const CONFIG = {
+  // من Formspree.io بعد إنشاء فورم جديد (يوصلك إيميل بكل تسجيل)
+  formspreeEndpoint: "https://formspree.io/f/mrengkzn",
+  // من Google Apps Script بعد نشره كـ Web App (يحفظ البيانات بجدول Google Sheet)
+  sheetEndpoint: "https://script.google.com/macros/s/AKfycbzwgVSeLzZq3HbN3CFmNomebjaDLz1Zxc8Opx3m-tnSRIcZBRd37-Z29vA7VpleySSmWg/exec"
+};
+// =======================================================================================
+
+const packages = {
+  pkg1: { ar:"باقة شهر", en:"1-Month Package", price:35, durAr:"شهر واحد", durEn:"1 month" },
+  pkg2: { ar:"باقة شهرين", en:"2-Month Package", price:60, durAr:"شهرين", durEn:"2 months" },
+  pkg3: { ar:"باقة 3 شهور", en:"3-Month Package", price:85, durAr:"3 شهور", durEn:"3 months" },
+  pkg4: { ar:"استشارة فقط", en:"Consultation Only", price:20, durAr:"مرة واحدة", durEn:"One-time" }
+};
+let selectedPkg = 'pkg3';
+
+function selectPackage(pkgId){
+  selectedPkg = pkgId;
+  updatePaySummary();
+  const cards = document.querySelectorAll('.pkg-grid .pkg-card');
+  cards.forEach(c=>c.classList.remove('selected'));
+  const order = ['pkg1','pkg2','pkg3','pkg4'];
+  const idx = order.indexOf(pkgId);
+  if(idx > -1 && cards[idx]) cards[idx].classList.add('selected');
+}
+
+function updatePaySummary(){
+  const p = packages[selectedPkg];
+  document.getElementById('sumPkgName').textContent = currentLang === 'ar' ? p.ar : p.en;
+  document.getElementById('sumDuration').textContent = currentLang === 'ar' ? p.durAr : p.durEn;
+  document.getElementById('sumPrice').textContent = p.price;
+}
+
+function clearInvalid(){
+  document.querySelectorAll('.invalid').forEach(el=>el.classList.remove('invalid'));
+}
+
+function validateForm(){
+  clearInvalid();
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  const errors = [];
+  const isAr = currentLang === 'ar';
+
+  const name = val('f_name');
+  if(!name){ errors.push(isAr ? 'الاسم الكامل مطلوب' : 'Full name is required'); mark('f_name'); }
+
+  const age = val('f_age');
+  if(!age || Number(age) < 10 || Number(age) > 90){ errors.push(isAr ? 'العمر مطلوب ولازم يكون رقم منطقي' : 'A valid age is required'); mark('f_age'); }
+
+  const phone = val('f_phone');
+  if(!/^[79][0-9]{7}$/.test(phone)){ errors.push(isAr ? 'رقم الهاتف لازم يكون 8 أرقام ويبدأ بـ7 أو 9' : 'Phone must be 8 digits, starting with 7 or 9'); mark('f_phone'); }
+
+  const email = val('f_email');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errors.push(isAr ? 'البريد الإلكتروني غير صحيح' : 'A valid email is required'); mark('f_email'); }
+
+  return errors;
+}
+
+function mark(id){
+  const el = document.getElementById(id);
+  if(el) el.classList.add('invalid');
+}
+
+function goToPayment(){
+  const statusEl = document.getElementById('submitStatus');
+  const errors = validateForm();
+  const payBtn = document.getElementById('payBtn');
+
+  if(errors.length){
+    statusEl.style.color = '#c0574a';
+    statusEl.textContent = '⚠️ ' + errors.join(' — ');
+    payBtn.classList.add('pay-disabled');
+    document.getElementById('payHint').style.display = 'block';
+    return;
+  }
+
+  statusEl.style.color = '#3E7C74';
+  statusEl.textContent = currentLang === 'ar'
+    ? 'تمام ✅ راجع طلبك وأكمل الدفع.'
+    : 'Great ✅ Review your order and complete payment.';
+
+  payBtn.classList.remove('pay-disabled');
+  document.getElementById('payHint').style.display = 'none';
+  document.querySelector('#register .pay-card').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function completePayment(){
+  const errors = validateForm();
+  const statusEl = document.getElementById('submitStatus');
+
+  if(errors.length){
+    statusEl.style.color = '#c0574a';
+    statusEl.textContent = '⚠️ ' + errors.join(' — ');
+    document.querySelector('#register .form-card').scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  if(!document.getElementById('termsAgree').checked){
+    statusEl.style.color = '#c0574a';
+    statusEl.textContent = currentLang === 'ar'
+      ? '⚠️ لازم توافق على شروط الاشتراك قبل إتمام الدفع.'
+      : '⚠️ You must agree to the subscription terms before completing payment.';
+    document.querySelector('.terms-box').scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  const payload = {
+    package: packages[selectedPkg][currentLang === 'ar' ? 'ar' : 'en'],
+    price: packages[selectedPkg].price,
+    name: val('f_name'), age: val('f_age'), gender: val('f_gender'), phone: val('f_phone'),
+    email: val('f_email'), city: val('f_city'),
+    height: val('f_height'), weight: val('f_weight'), targetWeight: val('f_targetWeight'),
+    health: val('f_health'), meds: val('f_meds'), allergy: val('f_allergy'), sleep: val('f_sleep'),
+    goal: val('f_goal'), level: val('f_level'), place: val('f_place'), days: val('f_days'),
+    notes: val('f_notes'), submittedAt: new Date().toISOString()
+  };
+
+  const payBtn = document.getElementById('payBtn');
+  payBtn.classList.add('pay-disabled');
+  payBtn.textContent = currentLang === 'ar' ? 'جاري التوجيه لصفحة الدفع...' : 'Redirecting to payment...';
+
+  const orderId = 'ORD' + Date.now();
+  sessionStorage.setItem('pendingPayment', JSON.stringify(payload));
+
+  const baseUrl = window.location.origin + window.location.pathname;
+  const successUrl = baseUrl + '?payment=success&ref=' + orderId;
+  const cancelUrl = baseUrl + '?payment=cancelled';
+
+  fetch(CONFIG.sheetEndpoint, {
+    method:'POST',
+    body: JSON.stringify({
+      action: 'createThawaniSession',
+      package: payload.package, price: payload.price,
+      name: payload.name, phone: payload.phone, email: payload.email,
+      successUrl, cancelUrl, orderId
+    })
+  })
+  .then(r => r.json())
+  .then(result => {
+    if(result.status === 'success' && result.paymentUrl){
+      window.location.href = result.paymentUrl;
+    } else {
+      throw new Error(result.message || 'unknown');
+    }
+  })
+  .catch((err)=>{
+    statusEl.style.color = '#c0574a';
+    statusEl.textContent = 'DEBUG: ' + err.message;
+    payBtn.classList.remove('pay-disabled');
+    payBtn.textContent = translations[currentLang]['pay.btn'];
+  });
+}
+
+function checkPaymentReturn(){
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('payment');
+  if(status === 'success'){
+    const stored = sessionStorage.getItem('pendingPayment');
+    if(stored){
+      const payload = JSON.parse(stored);
+      Promise.allSettled([
+        fetch(CONFIG.formspreeEndpoint, {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify(payload)
+        }),
+        fetch(CONFIG.sheetEndpoint, { method:'POST', body:JSON.stringify(payload) })
+      ]).then((results)=>{
+        const anySuccess = results.some(r => r.status === 'fulfilled' && r.value && r.value.ok);
+        if(anySuccess){
+          lastPayload = payload;
+          showSuccessModal();
+        }
+        sessionStorage.removeItem('pendingPayment');
+      });
+    }
+    history.replaceState({}, '', window.location.pathname);
+  } else if(status === 'cancelled'){
+    history.replaceState({}, '', window.location.pathname);
+    const statusEl = document.getElementById('submitStatus');
+    if(statusEl){
+      statusEl.style.color = '#c0574a';
+      statusEl.textContent = currentLang === 'ar'
+        ? 'تم إلغاء عملية الدفع. تقدر تحاول مرة ثانية متى ما تبي.'
+        : 'Payment was cancelled. You can try again whenever you\'re ready.';
+    }
+  }
+}
+
+function applyLang(lang){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(translations[lang][key] !== undefined){
+      el.textContent = translations[lang][key];
+    }
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-placeholder');
+    if(translations[lang][key] !== undefined){
+      el.setAttribute('placeholder', translations[lang][key]);
+    }
+  });
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  document.getElementById('langToggle').textContent = lang === 'ar' ? 'English' : 'العربية';
+  updatePaySummary();
+  if(document.getElementById('successSummary').style.display !== 'none'){
+    populateSummary();
+  }
+}
+
+function toggleLang(){
+  currentLang = currentLang === 'ar' ? 'en' : 'ar';
+  applyLang(currentLang);
+}
+
+updatePaySummary();
+checkPaymentReturn();
+</script>
+
+</body>
+</html>
