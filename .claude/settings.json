@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "mkdir -p ~/.claude/instagram && cp -n \"$CLAUDE_PROJECT_DIR/.claude/instagram/voice.md\" ~/.claude/instagram/voice.md 2>/dev/null; true"
+            "command": "s=\"$CLAUDE_PROJECT_DIR/.claude/instagram/voice.md\"; d=\"$HOME/.claude/instagram/voice.md\"; mkdir -p \"$HOME/.claude/instagram\"; if [ -f \"$s\" ] && { [ ! -f \"$d\" ] || [ \"$s\" -nt \"$d\" ]; }; then [ -f \"$d\" ] && cp \"$d\" \"$d.bak\"; cp \"$s\" \"$d\"; fi; true"
           }
         ]
       }
